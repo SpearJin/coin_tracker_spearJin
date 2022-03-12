@@ -1,10 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
+import Router from './routes/Router';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <span>fdsafsfsdfsda</span>
+      <Router />
     </>
   );
 }
