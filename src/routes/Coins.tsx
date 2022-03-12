@@ -1,65 +1,47 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { fetchCoins } from '../api';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
-const coinData = [
-  {
-    id: '1',
-    name: '비트코인',
-  },
-  {
-    id: '2',
-    name: '비트코코',
-  },
-  {
-    id: '3',
-    name: '비트코로나',
-  },
-  {
-    id: '4',
-    name: '비트코끼리',
-  },
-  {
-    id: '5',
-    name: '비트코코볼',
-  },
-  {
-    id: '6',
-    name: '비트코난',
-  },
-  {
-    id: '3',
-    name: '비트코로나',
-  },
-  {
-    id: '4',
-    name: '비트코끼리',
-  },
-  {
-    id: '5',
-    name: '비트코코볼',
-  },
-  {
-    id: '6',
-    name: '비트코난',
-  },
-];
+interface ICoins {
+  id: string;
+  name: string;
+  symbol: string;
+  rank: number;
+  is_new: boolean;
+  is_active: boolean;
+  type: string;
+}
 
 function Coins() {
-  const [coins, setCoins] = useState(coinData);
+  const { isLoading, data: coins } = useQuery<ICoins[]>('allCoins', fetchCoins);
 
   return (
     <Container>
       <Header>
         <Title>코인</Title>
       </Header>
-      <CoinInfo>
-        <SubTitle>Top 10</SubTitle>
-        <CoinList>
-          {coins.map((coin) => (
-            <Coin key={coin.id}>{coin.name}</Coin>
-          ))}
-        </CoinList>
-      </CoinInfo>
+      {isLoading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <CoinInfo>
+          <CoinInfoHeader>
+            <SubTitle>Top 10</SubTitle>
+            <Link to='/btc-bitcoin'>코인 리스트</Link>
+          </CoinInfoHeader>
+          <CoinList>
+            {coins?.slice(0, 10).map((coin) => (
+              <Coin key={coin.id}>
+                <Link to={{ pathname: `/${coin.id}` }}>
+                  <Img src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />
+                  <span>{coin.name}</span>
+                </Link>
+              </Coin>
+            ))}
+          </CoinList>
+        </CoinInfo>
+      )}
     </Container>
   );
 }
@@ -80,11 +62,28 @@ const Title = styled.h1`
   font-size: 48px;
 `;
 
+const Loader = styled.h3`
+  font-size: 28px;
+  text-align: center;
+`;
+
 const CoinInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
   max-width: 800px;
+`;
+
+const CoinInfoHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  a {
+    font-size: 14px;
+    &:hover {
+      color: ${(props) => props.theme.accentColor};
+    }
+  }
 `;
 
 const SubTitle = styled.h2`
@@ -102,11 +101,27 @@ const CoinList = styled.ul`
 
 const Coin = styled.li`
   display: flex;
-  padding: 40px;
+  align-items: center;
+  padding: 20px;
+  margin: 10px 0;
   width: 30%;
   border-radius: 15px;
   background-color: ${(props) => props.theme.cardColor};
   box-shadow: 0px 0px 5px 3px #303030;
+  a {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    &:hover {
+      color: ${(props) => props.theme.accentColor};
+    }
+  }
+`;
+
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
 `;
 
 export default Coins;
