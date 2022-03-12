@@ -6,5 +6,7 @@ declare module 'styled-components' {
     textColor: string;
     accentColor: string;
     cardColor: string;
+    chartUpColor: string;
+    chartDownColor: string;
   }
 }

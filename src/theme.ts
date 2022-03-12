@@ -5,4 +5,6 @@ export const theme: DefaultTheme = {
   textColor: '#FFFFFF',
   accentColor: '#ED5E93',
   cardColor: 'transparent',
+  chartUpColor: '#D25044',
+  chartDownColor: '#1261C4',
 };

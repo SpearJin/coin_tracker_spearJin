@@ -59,6 +59,7 @@ const Container = styled.div`
   align-items: center;
   padding: 10px;
   width: 25vw;
+  height: 100%;
   border-radius: 15px;
   box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
 `;

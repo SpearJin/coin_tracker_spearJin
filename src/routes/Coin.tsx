@@ -38,9 +38,9 @@ const Title = styled.h1`
 `;
 
 const CoinContainer = styled.div`
-  width: 100%;
   display: flex;
   justify-content: space-evenly;
+  width: 100%;
 `;
 
 export default Coin;

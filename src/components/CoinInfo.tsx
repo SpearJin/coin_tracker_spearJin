@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useMatch } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchTickerInfo } from '../api';
 
@@ -69,38 +69,49 @@ function CoinInfo() {
   );
   const isLoading = infoLoading || tickerLoading;
 
+  const chartMatch = useMatch(`/${coinId}/chart`);
+  const priceMatch = useMatch(`/${coinId}/price`);
+
+  const percent = tickerData?.quotes?.USD?.percent_change_24h ? tickerData?.quotes?.USD?.percent_change_24h : false;
+
   return (
     <Container>
-      <Overview>
-        <OverviewItem>
-          <span>Rank:</span>
-          <span>{infoData?.rank}</span>
-        </OverviewItem>
-        <OverviewItem>
-          <span>Symbol:</span>
-          <span>{infoData?.symbol}</span>
-        </OverviewItem>
-      </Overview>
-      <Description>{infoData?.description}</Description>
-      <Overview>
-        <OverviewItem>
-          <span>총 거래량:</span>
-          <span>{tickerData?.total_supply}</span>
-        </OverviewItem>
-        <OverviewItem>
-          <span>최대 거래량:</span>
-          <span>{tickerData?.max_supply}</span>
-        </OverviewItem>
-      </Overview>
-      <Tabs>
-        <Tab>
-          <Link to={`/${coinId}/chart`}>차트</Link>
-        </Tab>
-        <Tab>
-          <Link to={`/${coinId}/price`}>정보</Link>
-        </Tab>
-      </Tabs>
-      <Outlet />
+      {isLoading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <>
+          <Overview>
+            <OverviewItem>
+              <span>Rank:</span>
+              <span>{infoData?.rank}</span>
+            </OverviewItem>
+            <OverviewItem>
+              <span>Symbol:</span>
+              <span>{infoData?.symbol}</span>
+            </OverviewItem>
+          </Overview>
+          <Description>{infoData?.description}</Description>
+          <Overview>
+            <OverviewItemPercent percent={percent > 0 ? true : false}>
+              <span>현재가:</span>
+              <span>{tickerData?.quotes.USD.price.toFixed(3)} USD</span>
+            </OverviewItemPercent>
+            <OverviewItemPercent percent={percent > 0 ? true : false}>
+              <span>전일 대비:</span>
+              <span>{tickerData?.quotes?.USD?.percent_change_24h}%</span>
+            </OverviewItemPercent>
+          </Overview>
+          <Tabs>
+            <Tab isActive={chartMatch !== null}>
+              <Link to={`/${coinId}/chart`}>차트</Link>
+            </Tab>
+            <Tab isActive={priceMatch !== null}>
+              <Link to={`/${coinId}/price`}>정보</Link>
+            </Tab>
+          </Tabs>
+        </>
+      )}
+      <Outlet context={{ coinId }} />
     </Container>
   );
 }
@@ -108,9 +119,15 @@ function CoinInfo() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 20px;
   width: 480px;
-  height: 600px;
+  height: 800px;
   overflow-y: auto;
+`;
+
+const Loader = styled.h2`
+  font-size: 38px;
+  text-align: center;
 `;
 
 const Overview = styled.div`
@@ -129,6 +146,20 @@ const OverviewItem = styled.div`
   }
 `;
 
+const OverviewItemPercent = styled.div<{ percent: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    margin-bottom: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  span:last-child {
+    color: ${(props) => (props.percent ? props.theme.chartUpColor : props.theme.chartDownColor)};
+  }
+`;
+
 const Description = styled.p`
   padding: 10px;
 `;
@@ -139,6 +170,8 @@ const Tabs = styled.div`
   margin-top: 20px;
 `;
 
-const Tab = styled.div``;
+const Tab = styled.div<{ isActive: boolean }>`
+  color: ${(props) => (props.isActive ? props.theme.accentColor : props.theme.textColor)};
+`;
 
 export default CoinInfo;
