@@ -108,7 +108,9 @@ function CoinInfo() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 480px;
+  width: 480px;
+  height: 600px;
+  overflow-y: auto;
 `;
 
 const Overview = styled.div`

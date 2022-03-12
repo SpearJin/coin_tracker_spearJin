@@ -65,12 +65,13 @@ const Container = styled.div`
 
 const Header = styled.header`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px;
 `;
 
 const Title = styled.h2`
-  font-size: 32px;
+  font-size: 24px;
 `;
 
 const Search = styled.form`
@@ -93,6 +94,23 @@ const Coinitems = styled.ul`
   width: 100%;
   max-height: 500px;
   overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 18px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+  }
 `;
 
 const CoinItem = styled.li`
