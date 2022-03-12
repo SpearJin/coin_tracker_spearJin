@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import { fetchCoins } from '../api';
@@ -15,16 +15,33 @@ interface ICoins {
 }
 
 function CoinList() {
-  const { isLoading, data: coins } = useQuery<ICoins[]>('allCoins', fetchCoins);
+  const { isLoading, data } = useQuery<ICoins[]>('allCoins', fetchCoins);
+  const [coins, setCoins] = useState(data);
+  const [myText, setMyTest] = useState('');
+
+  useEffect(() => {
+    const coinFilter = data?.filter((coin) => coin.name.toLocaleLowerCase().includes(myText.toLocaleLowerCase()));
+    setCoins(coinFilter);
+  }, [myText, data]);
+
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setMyTest(value);
+  };
 
   return (
     <Container>
       <Header>
         <Title>코인리스트</Title>
+        <Search>
+          <input type='text' value={myText} placeholder='티커검색...' onChange={onChange} />
+        </Search>
       </Header>
       <Coinitems>
         {coins?.slice(0, 100).map((coin) => (
-          <CoinItem>
+          <CoinItem key={coin.id}>
             <Link to={{ pathname: `/${coin.id}` }} state={{ name: coin.name }}>
               <Img src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />
               <span>{coin.name}</span>
@@ -41,16 +58,32 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  width: 25vw;
   border-radius: 15px;
-  box-shadow: 4px 4px 12px #51585a, -4px -4px 12px #a0a8ab;
+  box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
 `;
 
 const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
   padding: 10px;
 `;
 
 const Title = styled.h2`
   font-size: 32px;
+`;
+
+const Search = styled.form`
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  input {
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+  }
 `;
 
 const Coinitems = styled.ul`
@@ -69,9 +102,9 @@ const CoinItem = styled.li`
   width: 80%;
   padding: 5px;
   margin: 20px 0;
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: ${(props) => props.theme.cardColor};
-  box-shadow: 0px 0px 5px 3px #fff;
+  box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
   a {
     display: flex;
     padding: 10px;

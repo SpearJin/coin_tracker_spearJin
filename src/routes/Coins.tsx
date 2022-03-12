@@ -104,10 +104,10 @@ const Coin = styled.li`
   align-items: center;
   padding: 20px;
   margin: 10px 0;
-  width: 30%;
+  width: 35%;
   border-radius: 15px;
   background-color: ${(props) => props.theme.cardColor};
-  box-shadow: 0px 0px 5px 3px #303030;
+  box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
   a {
     display: flex;
     padding: 10px;
