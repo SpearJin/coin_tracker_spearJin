@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CoinInfo from '../components/CoinInfo';
 import CoinList from '../components/CoinList';
@@ -5,7 +6,11 @@ import CoinList from '../components/CoinList';
 function Coin() {
   return (
     <Container>
+      <h1></h1>
       <Header>
+        <Home>
+          <Link to='/'>🏠</Link>
+        </Home>
         <Title>코인</Title>
       </Header>
       <CoinContainer>
@@ -28,6 +33,13 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   height: 15vh;
+`;
+
+const Home = styled.div`
+  margin-right: 20px;
+  a {
+    font-size: 28px;
+  }
 `;
 
 const Title = styled.h1`
