@@ -1,6 +1,5 @@
-import React from 'react';
 import { useQuery } from 'react-query';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { fetchCoinHistory } from '../api';
 import ApexChart from 'react-apexcharts';
 import styled from 'styled-components';
@@ -36,7 +35,7 @@ function Chart() {
   return (
     <div>
       {isLoading ? (
-        'Loading Chart...'
+        <Loader>Loading Chart...</Loader>
       ) : (
         <ChartContainer>
           <ApexChart
@@ -86,6 +85,12 @@ const ChartContainer = styled.div`
   width: 100%;
   padding: 20px;
   margin-top: 20px;
+`;
+
+const Loader = styled.h2`
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
 `;
 
 export default Chart;

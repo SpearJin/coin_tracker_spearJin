@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { fetchCoins } from '../api';
 import { useQuery } from 'react-query';

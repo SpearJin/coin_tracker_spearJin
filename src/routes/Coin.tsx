@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useLocation, useParams } from 'react-router-dom';
-
 import CoinInfo from '../components/CoinInfo';
 import CoinList from '../components/CoinList';
 

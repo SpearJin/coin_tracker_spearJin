@@ -1,18 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
-import { fetchCoins, fetchTickerInfo, fetchTickers } from '../api';
-import { Link, useParams } from 'react-router-dom';
-
-interface ICoins {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-}
+import { fetchTickers } from '../api';
+import { Link } from 'react-router-dom';
 
 interface PriceData {
   id: string;
