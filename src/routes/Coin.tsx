@@ -6,7 +6,6 @@ import CoinList from '../components/CoinList';
 function Coin() {
   return (
     <Container>
-      <h1></h1>
       <Header>
         <Home>
           <Link to='/'>🏠</Link>

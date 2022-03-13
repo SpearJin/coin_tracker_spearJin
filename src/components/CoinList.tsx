@@ -67,7 +67,7 @@ function CoinList() {
       <Coinitems>
         {tickers?.slice(0, 100).map((ticker) => (
           <CoinItem key={ticker.id} percent={ticker.quotes.USD.percent_change_24h > 0}>
-            <Link to={{ pathname: `/${ticker.id}` }} state={{ name: ticker.name }}>
+            <Link to={{ pathname: `/${ticker.id}/price` }} state={{ name: ticker.name }}>
               <Img src={`https://cryptoicon-api.vercel.app/api/icon/${ticker.symbol.toLowerCase()}`} />
               <span>{ticker.name}</span>
               <span>{ticker.quotes.USD.percent_change_24h} %</span>
@@ -119,7 +119,7 @@ const Coinitems = styled.ul`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-height: 500px;
+  max-height: 650px;
   overflow: auto;
   ::-webkit-scrollbar {
     width: 22px;
@@ -127,10 +127,11 @@ const Coinitems = styled.ul`
   ::-webkit-scrollbar-thumb {
     background-color: #7bb4c3;
     background-clip: padding-box;
-    border: 2px solid transparent;
-    border-radius: 50%;
+    border: 3px solid transparent;
+    border-radius: 15px;
     cursor: pointer;
   }
+
   ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: #fff;

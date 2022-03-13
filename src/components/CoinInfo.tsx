@@ -81,6 +81,7 @@ function CoinInfo() {
         <Loader>Loading...</Loader>
       ) : (
         <>
+          <Title>{infoData?.name}</Title>
           <Overview>
             <OverviewItem>
               <span>Rank:</span>
@@ -91,7 +92,10 @@ function CoinInfo() {
               <span>{infoData?.symbol}</span>
             </OverviewItem>
           </Overview>
-          <Description>{infoData?.description}</Description>
+          <Description>
+            <span>상품설명</span>
+            <p>{infoData?.description}</p>
+          </Description>
           <Overview>
             <OverviewItemPercent percent={percent > 0 ? true : false}>
               <span>현재가:</span>
@@ -103,11 +107,11 @@ function CoinInfo() {
             </OverviewItemPercent>
           </Overview>
           <Tabs>
-            <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>차트</Link>
-            </Tab>
             <Tab isActive={priceMatch !== null}>
               <Link to={`/${coinId}/price`}>정보</Link>
+            </Tab>
+            <Tab isActive={chartMatch !== null}>
+              <Link to={`/${coinId}/chart`}>차트</Link>
             </Tab>
           </Tabs>
         </>
@@ -120,14 +124,22 @@ function CoinInfo() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
+  padding: 10px 20px;
   width: 480px;
-  height: 800px;
+  max-height: 800px;
+  border-radius: 15px;
+  box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
   overflow-y: auto;
 `;
 
 const Loader = styled.h2`
   font-size: 38px;
+  text-align: center;
+`;
+
+const Title = styled.h2`
+  padding: 10px;
+  font-size: 32px;
   text-align: center;
 `;
 
@@ -166,8 +178,16 @@ const OverviewItemPercent = styled.div<{ percent: boolean }>`
   }
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   padding: 10px;
+  font-weight: 600;
+  span {
+    font-weight: 300;
+    font-size: 10px;
+  }
+  p {
+    margin-top: 5px;
+  }
 `;
 
 const Tabs = styled.div`
@@ -180,6 +200,9 @@ const Tab = styled.div<{ isActive: boolean }>`
   color: ${(props) => (props.isActive ? props.theme.accentColor : props.theme.textColor)};
   a {
     display: block;
+  }
+  &:hover {
+    opacity: 0.8;
   }
 `;
 
