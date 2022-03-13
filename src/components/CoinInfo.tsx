@@ -134,16 +134,21 @@ const Loader = styled.h2`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 8px;
+  border-radius: 15px;
+  border: 1px solid ${(props) => props.theme.textColor};
 `;
 
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 16px;
   span:first-child {
     margin-bottom: 5px;
-    font-size: 12px;
+    font-size: 10px;
     text-transform: uppercase;
+    font-weight: 300;
   }
 `;
 
