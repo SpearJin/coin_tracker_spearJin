@@ -4,6 +4,10 @@ export async function fetchCoins() {
   return await fetch(`${BASE_URL}/coins`).then((response) => response.json());
 }
 
+export async function fetchTickers() {
+  return await fetch(`${BASE_URL}/tickers`).then((response) => response.json());
+}
+
 export async function fetchCoinInfo(coinId?: string) {
   return await fetch(`${BASE_URL}/coins/${coinId}`).then((response) => response.json());
 }

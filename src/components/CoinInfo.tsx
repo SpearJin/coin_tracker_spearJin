@@ -64,13 +64,15 @@ function CoinInfo() {
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(['coinInfo', coinId], () =>
     fetchCoinInfo(coinId)
   );
-  const { isLoading: tickerLoading, data: tickerData } = useQuery<PriceData>(['tickerInfo', coinId], () =>
-    fetchTickerInfo(coinId)
+  const { isLoading: tickerLoading, data: tickerData } = useQuery<PriceData>(
+    ['tickerInfo', coinId],
+    () => fetchTickerInfo(coinId),
+    { refetchInterval: 5000 }
   );
   const isLoading = infoLoading || tickerLoading;
 
-  const chartMatch = useMatch(`/${coinId}/chart`);
-  const priceMatch = useMatch(`/${coinId}/price`);
+  const chartMatch = useMatch('/:coinId/chart');
+  const priceMatch = useMatch('/:coinId/price');
 
   const percent = tickerData?.quotes?.USD?.percent_change_24h ? tickerData?.quotes?.USD?.percent_change_24h : false;
 
@@ -172,6 +174,9 @@ const Tabs = styled.div`
 
 const Tab = styled.div<{ isActive: boolean }>`
   color: ${(props) => (props.isActive ? props.theme.accentColor : props.theme.textColor)};
+  a {
+    display: block;
+  }
 `;
 
 export default CoinInfo;
