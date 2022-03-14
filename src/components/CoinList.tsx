@@ -145,6 +145,7 @@ const CoinItem = styled.li<{ percent: boolean }>`
     margin-left: 10px;
     color: ${(props) => (props.percent ? props.theme.chartUpColor : props.theme.chartDownColor)};
     font-size: 14px;
+    font-weight: 800;
   }
   @media (max-width: 1020px) {
     a {

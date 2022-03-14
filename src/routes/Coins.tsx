@@ -4,12 +4,16 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import ToggleBtn from '../components/ToggleBtn';
 import { ICoins } from '../type';
+import { Helmet } from 'react-helmet-async';
 
 function Coins() {
   const { isLoading, data: coins } = useQuery<ICoins[]>('allCoins', fetchCoins);
 
   return (
     <Container>
+      <Helmet>
+        <title>스피어진_코인</title>
+      </Helmet>
       <Header>
         <Title>코인</Title>
         <ToggleBtn />

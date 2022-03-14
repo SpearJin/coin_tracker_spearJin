@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { useRecoilValue } from 'recoil';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { isDarkAtom } from './atoms';
@@ -11,7 +12,9 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <Router />
+        <HelmetProvider>
+          <Router />
+        </HelmetProvider>
       </ThemeProvider>
     </>
   );
@@ -50,6 +53,7 @@ body {
   color: ${(props) => props.theme.textColor};
   font-family: 'Open Sans', sans-serif;
 	line-height: 1;
+  font-weight: 400;
 }
 ol, ul {
 	list-style: none;

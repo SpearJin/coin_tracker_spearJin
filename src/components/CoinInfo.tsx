@@ -3,6 +3,7 @@ import { Link, Outlet, useParams, useMatch } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchTickerInfo } from '../api';
 import { InfoData, PriceData } from '../type';
+import { Helmet } from 'react-helmet-async';
 
 function CoinInfo() {
   const { coinId } = useParams();
@@ -23,6 +24,9 @@ function CoinInfo() {
 
   return (
     <Container>
+      <Helmet>
+        <title>{infoData ? `스피어진_${infoData?.name}` : 'Loading...'}</title>
+      </Helmet>
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
@@ -71,7 +75,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  width: 480px;
+  width: 600px;
   max-height: 800px;
   border-radius: 15px;
   box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
@@ -110,11 +114,12 @@ const OverviewItem = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 16px;
+  font-weight: 800;
   span:first-child {
     margin-bottom: 5px;
     font-size: 10px;
     text-transform: uppercase;
-    font-weight: 300;
+    font-weight: 400;
   }
 `;
 
@@ -122,9 +127,11 @@ const OverviewItemPercent = styled.div<{ percent: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: 800;
   span:first-child {
     margin-bottom: 5px;
     font-size: 12px;
+    font-weight: 400;
     text-transform: uppercase;
   }
   span:last-child {
@@ -134,9 +141,9 @@ const OverviewItemPercent = styled.div<{ percent: boolean }>`
 
 const Description = styled.div`
   padding: 10px;
-  font-weight: 600;
+  font-weight: 800;
   span {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 10px;
   }
   p {
@@ -152,6 +159,7 @@ const Tabs = styled.div`
 
 const Tab = styled.div<{ isActive: boolean }>`
   color: ${(props) => (props.isActive ? props.theme.accentColor : props.theme.textColor)};
+  font-weight: 800;
   a {
     display: block;
   }

@@ -108,6 +108,7 @@ const PriceInfo = styled.h3<{ percent: number }>`
   color: ${(props) => (props.percent > 0 ? props.theme.chartUpColor : props.theme.chartDownColor)};
   font-size: 22px;
   flex-basis: 50%;
+  font-weight: 800;
   @media (max-width: 1020px) {
     font-size: 18px;
   }
