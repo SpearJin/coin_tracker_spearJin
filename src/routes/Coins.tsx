@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { fetchCoins } from '../api';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import ToggleBtn from '../components/ToggleBtn';
 
 interface ICoins {
   id: string;
@@ -20,6 +21,7 @@ function Coins() {
     <Container>
       <Header>
         <Title>코인</Title>
+        <ToggleBtn />
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>

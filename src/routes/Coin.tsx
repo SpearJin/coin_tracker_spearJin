@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CoinInfo from '../components/CoinInfo';
 import CoinList from '../components/CoinList';
+import ToggleBtn from '../components/ToggleBtn';
 
 function Coin() {
   return (
@@ -11,6 +12,7 @@ function Coin() {
           <Link to='/'>🏠</Link>
         </Home>
         <Title>코인</Title>
+        <ToggleBtn />
       </Header>
       <CoinContainer>
         <CoinInfo />

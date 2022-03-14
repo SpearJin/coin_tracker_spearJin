@@ -105,11 +105,14 @@ const Search = styled.form`
   display: flex;
   align-items: center;
   margin-left: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px #51585a, -2px -2px 3px #a0a8ab;
   input {
     height: 30px;
     outline: none;
     border: none;
     border-radius: 10px;
+    color: ${(props) => props.theme.textColor};
     text-align: center;
   }
 `;
@@ -125,7 +128,7 @@ const Coinitems = styled.ul`
     width: 22px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #7bb4c3;
+    background-color: #918b8a;
     background-clip: padding-box;
     border: 3px solid transparent;
     border-radius: 15px;
