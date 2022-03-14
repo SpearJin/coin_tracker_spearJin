@@ -5,21 +5,7 @@ import ApexChart from 'react-apexcharts';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { isDarkAtom } from '../atoms';
-
-interface IHistorical {
-  time_open: string;
-  time_close: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
-  market_cap: number;
-}
-
-interface ChartProps {
-  coinId: string;
-}
+import { ChartProps, IHistorical } from '../type';
 
 function Chart() {
   const isDark = useRecoilValue(isDarkAtom);

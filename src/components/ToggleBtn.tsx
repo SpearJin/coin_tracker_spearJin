@@ -34,7 +34,6 @@ const Label = styled.label<{ isDark: boolean }>`
   height: 100%;
   background-color: ${(props) => (props.isDark ? '#444E56' : '#E1D3D5')};
   border-radius: 20px;
-  transition: all 250ms ease-in;
   cursor: pointer;
 `;
 
@@ -52,7 +51,7 @@ const Span = styled.span`
   border-radius: 50%;
   font-size: 20px;
   transform: translateY(-50%);
-  transition: all 300ms ease-in;
+  transition: transform 300ms ease-in;
 `;
 
 export default ToggleBtn;

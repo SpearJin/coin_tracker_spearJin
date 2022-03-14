@@ -3,16 +3,7 @@ import { fetchCoins } from '../api';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import ToggleBtn from '../components/ToggleBtn';
-
-interface ICoins {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-}
+import { ICoins } from '../type';
 
 function Coins() {
   const { isLoading, data: coins } = useQuery<ICoins[]>('allCoins', fetchCoins);
