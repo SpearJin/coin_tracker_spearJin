@@ -95,8 +95,9 @@ const Search = styled.form`
     outline: none;
     border: none;
     border-radius: 10px;
-    color: ${(props) => props.theme.textColor};
+    color: #2f4858;
     text-align: center;
+    letter-spacing: 1.5px;
   }
 `;
 
