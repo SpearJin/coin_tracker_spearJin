@@ -25,7 +25,7 @@ const Container = styled.div`
   align-items: center;
   width: 50px;
   height: 25px;
-  margin-left: 5px;
+  margin-left: 10px;
 `;
 
 const Label = styled.label<{ isDark: boolean }>`
@@ -50,8 +50,7 @@ const Span = styled.span`
   top: 50%;
   left: 0;
   border-radius: 50%;
-
-  font-size: 25px;
+  font-size: 20px;
   transform: translateY(-50%);
   transition: all 300ms ease-in;
 `;

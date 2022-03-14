@@ -29,7 +29,7 @@ function Coins() {
         <CoinInfo>
           <CoinInfoHeader>
             <SubTitle>Top 10</SubTitle>
-            <Link to='/btc-bitcoin'>코인 리스트</Link>
+            <Link to='/btc-bitcoin/price'>코인 리스트</Link>
           </CoinInfoHeader>
           <CoinList>
             {coins?.slice(0, 10).map((coin) => (
