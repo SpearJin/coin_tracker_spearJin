@@ -48,6 +48,7 @@ function Coins() {
 }
 
 const Container = styled.div`
+  min-width: 420px;
   padding: 20px;
   margin: 0 auto;
 `;
@@ -88,6 +89,7 @@ const CoinInfoHeader = styled.div`
 `;
 
 const SubTitle = styled.h2`
+  padding: 0 10px;
   margin-bottom: 40px;
   font-size: 32px;
 `;
@@ -108,6 +110,7 @@ const Coin = styled.li`
   width: 35%;
   border-radius: 15px;
   background-color: ${(props) => props.theme.cardColor};
+  font-size: 20px;
   box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
   a {
     display: flex;
@@ -117,11 +120,14 @@ const Coin = styled.li`
       color: ${(props) => props.theme.accentColor};
     }
   }
+  @media (max-width: 770px) {
+    width: 60%;
+  }
 `;
 
 const Img = styled.img`
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   margin-right: 10px;
 `;
 

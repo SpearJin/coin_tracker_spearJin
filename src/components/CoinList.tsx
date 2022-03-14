@@ -88,6 +88,15 @@ const Container = styled.div`
   height: 100%;
   border-radius: 15px;
   box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
+  @media (max-width: 1020px) {
+    width: 25vw;
+    max-height: 600px;
+  }
+  @media (max-width: 680px) {
+    width: 100%;
+    min-width: 200px;
+    margin-top: 30px;
+  }
 `;
 
 const Header = styled.header`
@@ -95,6 +104,13 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  @media (max-width: 1020px) {
+    flex-direction: column;
+    row-gap: 8px;
+  }
+  @media (max-width: 680px) {
+    flex-direction: row;
+  }
 `;
 
 const Title = styled.h2`
@@ -163,12 +179,37 @@ const CoinItem = styled.li<{ percent: boolean }>`
     color: ${(props) => (props.percent ? props.theme.chartUpColor : props.theme.chartDownColor)};
     font-size: 14px;
   }
+  @media (max-width: 1020px) {
+    a {
+      flex-direction: column;
+      justify-content: center;
+      row-gap: 5px;
+    }
+    span:last-child {
+      margin: 0;
+    }
+  }
+  @media (max-width: 680px) {
+    a {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+    span:last-child {
+      margin-left: 10px;
+    }
+  }
 `;
 
 const Img = styled.img`
   width: 35px;
   height: 35px;
   margin-right: 10px;
+  @media (max-width: 1020px) {
+    margin: 0;
+  }
+  @media (max-width: 680px) {
+    margin-right: 10px;
+  }
 `;
 
 export default CoinList;

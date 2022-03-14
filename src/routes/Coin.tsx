@@ -27,6 +27,7 @@ const Container = styled.div`
   flex-direction: column;
   padding: 20px;
   margin: 0 auto;
+  min-width: 420px;
 `;
 
 const Header = styled.header`
@@ -51,6 +52,9 @@ const CoinContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   width: 100%;
+  @media (max-width: 680px) {
+    flex-direction: column;
+  }
 `;
 
 export default Coin;

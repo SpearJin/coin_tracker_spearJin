@@ -130,6 +130,14 @@ const Container = styled.div`
   border-radius: 15px;
   box-shadow: 4px 4px 6px #51585a, -4px -4px 6px #a0a8ab;
   overflow-y: auto;
+  @media (max-width: 1020px) {
+    width: 350px;
+    max-height: 600px;
+  }
+  @media (max-width: 680px) {
+    width: 100%;
+    min-width: 200px;
+  }
 `;
 
 const Loader = styled.h2`
