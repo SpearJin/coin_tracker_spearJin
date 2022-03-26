@@ -6,13 +6,17 @@ import { Link } from 'react-router-dom';
 import { PriceData } from '../type';
 
 function CoinList() {
-  const { isLoading, data } = useQuery<PriceData[]>('allTicker', fetchTickers, { refetchInterval: 5000 });
+  const { isLoading, data } = useQuery<PriceData[]>('allTicker', fetchTickers, {
+    refetchInterval: 5000,
+  });
 
   const [tickers, setTickers] = useState(data);
   const [myText, setMyTest] = useState('');
 
   useEffect(() => {
-    const coinFilter = data?.filter((coin) => coin.name.toLocaleLowerCase().includes(myText.toLocaleLowerCase()));
+    const coinFilter = data?.filter((coin) =>
+      coin.name.toLocaleLowerCase().includes(myText.toLocaleLowerCase())
+    );
     setTickers(coinFilter);
   }, [myText, data]);
 
@@ -28,14 +32,27 @@ function CoinList() {
       <Header>
         <Title>코인리스트</Title>
         <Search>
-          <input type='text' value={myText} placeholder='티커검색...' onChange={onChange} />
+          <input
+            type='text'
+            value={myText}
+            placeholder='티커검색...'
+            onChange={onChange}
+          />
         </Search>
       </Header>
       <Coinitems>
         {tickers?.slice(0, 100).map((ticker) => (
-          <CoinItem key={ticker.id} percent={ticker.quotes.USD.percent_change_24h > 0}>
-            <Link to={{ pathname: `/${ticker.id}/price` }} state={{ name: ticker.name }}>
-              <Img src={`https://cryptoicon-api.vercel.app/api/icon/${ticker.symbol.toLowerCase()}`} />
+          <CoinItem
+            key={ticker.id}
+            percent={ticker.quotes.USD.percent_change_24h > 0}
+          >
+            <Link
+              to={{ pathname: `/${ticker.id}/price` }}
+              state={{ name: ticker.name }}
+            >
+              <Img
+                src={`https://cryptocurrencyliveprices.com/img/${ticker.id}.png`}
+              />
               <span>{ticker.name}</span>
               <span>{ticker.quotes.USD.percent_change_24h} %</span>
             </Link>
@@ -144,7 +161,8 @@ const CoinItem = styled.li<{ percent: boolean }>`
   }
   span:last-child {
     margin-left: 10px;
-    color: ${(props) => (props.percent ? props.theme.chartUpColor : props.theme.chartDownColor)};
+    color: ${(props) =>
+      props.percent ? props.theme.chartUpColor : props.theme.chartDownColor};
     font-size: 14px;
     font-weight: 800;
   }
