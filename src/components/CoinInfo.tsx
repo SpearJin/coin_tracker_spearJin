@@ -7,20 +7,31 @@ import { Helmet } from 'react-helmet-async';
 
 function CoinInfo() {
   const { coinId } = useParams();
-  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(['coinInfo', coinId], () =>
-    fetchCoinInfo(coinId)
+
+  // 티커에 대략적인 정보
+  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
+    ['coinInfo', coinId],
+    () => fetchCoinInfo(coinId)
   );
+
+  // 티커에 가격 정보 자세히
   const { isLoading: tickerLoading, data: tickerData } = useQuery<PriceData>(
     ['tickerInfo', coinId],
     () => fetchTickerInfo(coinId),
     { refetchInterval: 5000 }
   );
+
+  // true 경우 화면에 나타나도록 함
   const isLoading = infoLoading || tickerLoading;
 
+  // 정보, 차트 어떤걸 보여줄지
   const chartMatch = useMatch('/:coinId/chart');
   const priceMatch = useMatch('/:coinId/price');
 
-  const percent = tickerData?.quotes?.USD?.percent_change_24h ? tickerData?.quotes?.USD?.percent_change_24h : false;
+  // 상승, 하락 글자색
+  const percent = tickerData?.quotes?.USD?.percent_change_24h
+    ? tickerData?.quotes?.USD?.percent_change_24h
+    : false;
 
   return (
     <Container>
@@ -135,7 +146,8 @@ const OverviewItemPercent = styled.div<{ percent: boolean }>`
     text-transform: uppercase;
   }
   span:last-child {
-    color: ${(props) => (props.percent ? props.theme.chartUpColor : props.theme.chartDownColor)};
+    color: ${(props) =>
+      props.percent ? props.theme.chartUpColor : props.theme.chartDownColor};
   }
 `;
 
@@ -158,7 +170,8 @@ const Tabs = styled.div`
 `;
 
 const Tab = styled.div<{ isActive: boolean }>`
-  color: ${(props) => (props.isActive ? props.theme.accentColor : props.theme.textColor)};
+  color: ${(props) =>
+    props.isActive ? props.theme.accentColor : props.theme.textColor};
   font-weight: 800;
   a {
     display: block;

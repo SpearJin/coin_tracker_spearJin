@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Chart from './Chart';
-import Coin from './Coin';
-import Coins from './Coins';
-import Price from './Price';
+import Chart from '../page/Chart';
+import Coin from '../page/Coin';
+import Coins from '../page/Coins';
+import Price from '../page/Price';
 
 function Router() {
   return (

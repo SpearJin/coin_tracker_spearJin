@@ -10,14 +10,23 @@ import { ChartProps, IHistorical } from '../type';
 function Chart() {
   const isDark = useRecoilValue(isDarkAtom);
   const { coinId } = useOutletContext<ChartProps>();
-  const { isLoading, data } = useQuery<IHistorical[]>(['ohlcv', coinId], () => fetchCoinHistory(coinId), {
-    refetchInterval: 10000,
-  });
+  const { isLoading, data } = useQuery<IHistorical[]>(
+    ['ohlcv', coinId],
+    () => fetchCoinHistory(coinId),
+    {
+      refetchInterval: 10000,
+    }
+  );
 
   const getChartData = () =>
     data?.map((item) => {
       let x = item.time_close;
-      let y = [item.open.toFixed(3), item.high.toFixed(3), item.low.toFixed(3), item.close.toFixed(3)];
+      let y = [
+        item.open.toFixed(3),
+        item.high.toFixed(3),
+        item.low.toFixed(3),
+        item.close.toFixed(3),
+      ];
       return { x, y };
     });
 

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { PriceData } from '../type';
 
 function CoinList() {
-  const { isLoading, data } = useQuery<PriceData[]>('allTicker', fetchTickers, {
+  const { data } = useQuery<PriceData[]>('allTicker', fetchTickers, {
     refetchInterval: 5000,
   });
 

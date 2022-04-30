@@ -7,9 +7,13 @@ import { ChartProps, PriceData } from '../type';
 
 function Price() {
   const { coinId } = useOutletContext<ChartProps>();
-  const { isLoading, data: tickerInfo } = useQuery<PriceData>(['tickerInfo', coinId], () => fetchTickerInfo(coinId), {
-    refetchInterval: 10000,
-  });
+  const { isLoading, data: tickerInfo } = useQuery<PriceData>(
+    ['tickerInfo', coinId],
+    () => fetchTickerInfo(coinId),
+    {
+      refetchInterval: 10000,
+    }
+  );
 
   return (
     <>
@@ -19,14 +23,24 @@ function Price() {
         <PriceList>
           <PriceItem>
             <PriceName>현재가</PriceName>
-            <PriceInfo percent={tickerInfo?.quotes?.USD?.price ? tickerInfo?.quotes.USD.price : 0}>
+            <PriceInfo
+              percent={
+                tickerInfo?.quotes?.USD?.price
+                  ? tickerInfo?.quotes.USD.price
+                  : 0
+              }
+            >
               $ {tickerInfo?.quotes.USD.price.toFixed(3)}
             </PriceInfo>
           </PriceItem>
           <PriceItem>
             <PriceName>15분전</PriceName>
             <PriceInfo
-              percent={tickerInfo?.quotes?.USD?.percent_change_15m ? tickerInfo?.quotes.USD.percent_change_15m : 0}
+              percent={
+                tickerInfo?.quotes?.USD?.percent_change_15m
+                  ? tickerInfo?.quotes.USD.percent_change_15m
+                  : 0
+              }
             >
               {tickerInfo?.quotes.USD.percent_change_15m} %
             </PriceInfo>
@@ -34,7 +48,11 @@ function Price() {
           <PriceItem>
             <PriceName>1시간전</PriceName>
             <PriceInfo
-              percent={tickerInfo?.quotes.USD.percent_change_1h ? tickerInfo?.quotes.USD.percent_change_1h : 0}
+              percent={
+                tickerInfo?.quotes.USD.percent_change_1h
+                  ? tickerInfo?.quotes.USD.percent_change_1h
+                  : 0
+              }
             >
               {tickerInfo?.quotes.USD.percent_change_1h} %
             </PriceInfo>
@@ -42,7 +60,11 @@ function Price() {
           <PriceItem>
             <PriceName>12시간전</PriceName>
             <PriceInfo
-              percent={tickerInfo?.quotes.USD.percent_change_12h ? tickerInfo?.quotes.USD.percent_change_12h : 0}
+              percent={
+                tickerInfo?.quotes.USD.percent_change_12h
+                  ? tickerInfo?.quotes.USD.percent_change_12h
+                  : 0
+              }
             >
               {tickerInfo?.quotes.USD.percent_change_12h} %
             </PriceInfo>
@@ -50,7 +72,11 @@ function Price() {
           <PriceItem>
             <PriceName>1주일전</PriceName>
             <PriceInfo
-              percent={tickerInfo?.quotes.USD.percent_change_7d ? tickerInfo?.quotes.USD.percent_change_7d : 0}
+              percent={
+                tickerInfo?.quotes.USD.percent_change_7d
+                  ? tickerInfo?.quotes.USD.percent_change_7d
+                  : 0
+              }
             >
               {tickerInfo?.quotes.USD.percent_change_7d} %
             </PriceInfo>
@@ -58,7 +84,11 @@ function Price() {
           <PriceItem>
             <PriceName>1달전</PriceName>
             <PriceInfo
-              percent={tickerInfo?.quotes.USD.percent_change_30d ? tickerInfo?.quotes.USD.percent_change_30d : 0}
+              percent={
+                tickerInfo?.quotes.USD.percent_change_30d
+                  ? tickerInfo?.quotes.USD.percent_change_30d
+                  : 0
+              }
             >
               {tickerInfo?.quotes.USD.percent_change_30d} %
             </PriceInfo>
@@ -105,7 +135,8 @@ const PriceName = styled.h3`
 `;
 
 const PriceInfo = styled.h3<{ percent: number }>`
-  color: ${(props) => (props.percent > 0 ? props.theme.chartUpColor : props.theme.chartDownColor)};
+  color: ${(props) =>
+    props.percent > 0 ? props.theme.chartUpColor : props.theme.chartDownColor};
   font-size: 22px;
   flex-basis: 50%;
   font-weight: 800;
